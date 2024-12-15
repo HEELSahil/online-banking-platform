@@ -8,6 +8,10 @@ import { parseStringify } from "../utils";
 export const signIn = async ({ email, password }: signInProps) => {
   try {
     // Mutation / Databases / Make fetch
+    const { account } = await createAdminClient();
+    const response = await account.createEmailPasswordSession(email, password);
+
+    return parseStringify(response);
   } catch (error) {
     console.error("Error", error);
   }
